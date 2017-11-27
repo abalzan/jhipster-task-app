@@ -90,10 +90,10 @@ public class TaskResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Task createEntity(EntityManager em) {
-        Task task = new Task()
-            .name(DEFAULT_NAME)
-            .dueDate(DEFAULT_DUE_DATE)
-            .completed(DEFAULT_COMPLETED);
+        Task task = new Task();
+        task.setName(DEFAULT_NAME);
+        task.setDueDate(DEFAULT_DUE_DATE);
+        task.setCompleted(DEFAULT_COMPLETED);
         return task;
     }
 
@@ -119,7 +119,7 @@ public class TaskResourceIntTest {
         Task testTask = taskList.get(taskList.size() - 1);
         assertThat(testTask.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTask.getDueDate()).isEqualTo(DEFAULT_DUE_DATE);
-        assertThat(testTask.isCompleted()).isEqualTo(DEFAULT_COMPLETED);
+        assertThat(testTask.getCompleted()).isEqualTo(DEFAULT_COMPLETED);
     }
 
     @Test
@@ -245,10 +245,9 @@ public class TaskResourceIntTest {
 
         // Update the task
         Task updatedTask = taskRepository.findOne(task.getId());
-        updatedTask
-            .name(UPDATED_NAME)
-            .dueDate(UPDATED_DUE_DATE)
-            .completed(UPDATED_COMPLETED);
+        updatedTask.setName(UPDATED_NAME);
+        updatedTask.setDueDate(UPDATED_DUE_DATE);
+        updatedTask.setCompleted(UPDATED_COMPLETED);
 
         restTaskMockMvc.perform(put("/api/tasks")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -261,7 +260,7 @@ public class TaskResourceIntTest {
         Task testTask = taskList.get(taskList.size() - 1);
         assertThat(testTask.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTask.getDueDate()).isEqualTo(UPDATED_DUE_DATE);
-        assertThat(testTask.isCompleted()).isEqualTo(UPDATED_COMPLETED);
+        assertThat(testTask.getCompleted()).isEqualTo(UPDATED_COMPLETED);
     }
 
     @Test
